@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LiteGitHub</string>
+    <string name="login">Sign in</string>
+    <string name="password">Password</string>
+    <string name="account">Username or email address</string>
+    <string name="no_account">New to GitHub? Create an account.</string>
+</resources>
