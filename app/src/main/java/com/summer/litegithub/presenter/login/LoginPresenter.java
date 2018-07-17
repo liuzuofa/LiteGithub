@@ -2,6 +2,16 @@ package com.summer.litegithub.presenter.login;
 
 import com.summer.litegithub.Contract.LoginContract;
 import com.summer.litegithub.base.presenter.BasePresenter;
+import com.summer.litegithub.data.login.User;
+import com.summer.litegithub.model.api.ApiContent;
+import com.summer.litegithub.model.api.ApiService;
+import com.summer.litegithub.model.api.BaseResponse;
+import com.summer.litegithub.model.api.HttpObserver;
+import com.summer.litegithub.model.constant.Constant;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /*
  *  项目名：  LiteGitHub
@@ -20,6 +30,24 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
     @Override
     public void login(String name, String password) {
+        ApiContent.createApi(ApiService.class)
+                .login(name,password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new HttpObserver<BaseResponse<User>>() {
+                    @Override
+                    public void onNext(BaseResponse<User> userBaseResponse) {
+                        if (userBaseResponse.getErrorCode() == 0 ) {
+                            mView.loginSuccess(userBaseResponse.getData());
+                        } else if (userBaseResponse.getErrorCode() == -1) {
+                            mView.loginFail(userBaseResponse.getErrorMsg());
+                        }
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 }

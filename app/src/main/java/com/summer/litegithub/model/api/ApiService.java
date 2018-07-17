@@ -1,5 +1,11 @@
 package com.summer.litegithub.model.api;
 
+import com.summer.litegithub.data.login.User;
+
+
+import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 /*
@@ -11,6 +17,10 @@ import retrofit2.http.POST;
  *  描述：    TODO
  */
 public interface ApiService {
+
+    @POST("user/login")
+    @FormUrlEncoded
+    Observable<BaseResponse<User>> login(@Field("username") String username, @Field("password") String password);
 
 
 }

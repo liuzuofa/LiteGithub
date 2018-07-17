@@ -42,6 +42,10 @@ public class ApiContent {
         createProxy();
     }
 
+    public static <T> T createApi(Class<T> serviceClass) {
+        return mRetrofit.create(serviceClass);
+    }
+
     private static void createProxy() {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm.dd hh:mm:ss").create();
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()

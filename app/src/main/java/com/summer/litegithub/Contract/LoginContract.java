@@ -15,7 +15,7 @@ import com.summer.litegithub.data.login.User;
 public class LoginContract {
     public interface View extends AbstractView {
         void loginSuccess(User user);
-        void loginFail(User user);
+        void loginFail(String errorInfo);
     }
 
     public interface Presenter extends AbsPresenter<LoginContract.View> {

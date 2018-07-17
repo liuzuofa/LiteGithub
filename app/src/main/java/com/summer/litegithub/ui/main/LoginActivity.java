@@ -14,6 +14,7 @@ import com.summer.litegithub.base.activity.BaseActivity;
  *  描述：    TODO
  */
 public class LoginActivity extends BaseActivity{
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
