@@ -15,7 +15,7 @@ import android.content.Intent;
 public class JumpUtil {
 
     public static void startActivity(Context context, Class<? extends Activity> targetActivity) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(context,targetActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

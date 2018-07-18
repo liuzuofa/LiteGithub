@@ -3,15 +3,13 @@ package com.summer.litegithub.model.cookie;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.summer.litegithub.base.App.MyApplication;
+import com.summer.litegithub.base.app.MyApplication;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

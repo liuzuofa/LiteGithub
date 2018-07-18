@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.summer.litegithub.base.App.MyApplication;
+import com.summer.litegithub.base.app.MyApplication;
 import com.summer.litegithub.base.presenter.AbsPresenter;
 import com.summer.litegithub.base.view.AbstractView;
 

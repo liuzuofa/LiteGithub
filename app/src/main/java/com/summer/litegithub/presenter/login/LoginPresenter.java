@@ -1,5 +1,7 @@
 package com.summer.litegithub.presenter.login;
 
+import android.util.Log;
+
 import com.summer.litegithub.Contract.LoginContract;
 import com.summer.litegithub.base.presenter.BasePresenter;
 import com.summer.litegithub.data.login.User;
@@ -24,6 +26,8 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter{
 
     private LoginContract.View mView;
+    private String TAG = "LoginPresenter";
+
     public LoginPresenter(LoginContract.View view) {
         this.mView = view;
     }
@@ -37,6 +41,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                 .subscribe(new HttpObserver<BaseResponse<User>>() {
                     @Override
                     public void onNext(BaseResponse<User> userBaseResponse) {
+                        Log.d(TAG, "onNext: ");
                         if (userBaseResponse.getErrorCode() == 0 ) {
                             mView.loginSuccess(userBaseResponse.getData());
                         } else if (userBaseResponse.getErrorCode() == -1) {
@@ -46,7 +51,10 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.d(TAG, "onError: " + e.getMessage());
+                        if (e.getMessage() != null) {
+                            mView.loginFail(e.getMessage());
+                        }
                     }
                 });
     }
