@@ -1,4 +1,4 @@
-package com.summer.litegithub.ui.main;
+package com.summer.litegithub.ui.activity;
 
 import com.summer.litegithub.R;
 import com.summer.litegithub.base.activity.BaseActivity;

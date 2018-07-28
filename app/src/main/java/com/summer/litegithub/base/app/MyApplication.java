@@ -1,4 +1,4 @@
-package com.summer.litegithub.base.App;
+package com.summer.litegithub.base.app;
 
 import android.app.Application;
 

@@ -1,4 +1,4 @@
-package com.summer.litegithub.data.login;
+package com.summer.litegithub.data;
 
 /*
  *  项目名：  LiteGitHub

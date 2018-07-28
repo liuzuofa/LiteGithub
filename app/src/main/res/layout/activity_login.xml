@@ -32,7 +32,6 @@
                 android:layout_height="@dimen/dp_48"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/et_login_background"
-                android:gravity="center"
                 android:inputType="text|textEmailAddress" />
 
             <TextView
@@ -47,7 +46,6 @@
                 android:layout_height="@dimen/dp_48"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/et_login_background"
-                android:gravity="center"
                 android:inputType="textPassword" />
 
             <LinearLayout

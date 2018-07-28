@@ -49,6 +49,7 @@ dependencies {
     //other
     implementation 'me.yokeyword:fragmentation:1.3.5'
     implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.youth.banner:banner:1.4.10'
     //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

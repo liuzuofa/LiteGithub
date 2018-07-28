@@ -3,7 +3,7 @@ package com.summer.litegithub.base.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.summer.litegithub.base.App.MyApplication;
+import com.summer.litegithub.base.app.MyApplication;
 import com.summer.litegithub.base.presenter.AbsPresenter;
 import com.summer.litegithub.base.view.AbstractView;
 

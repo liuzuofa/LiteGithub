@@ -13,4 +13,8 @@ public class Constant {
     //string
     public static final String BUGLY_ID = "8029004728";
 
+    public final static int REQUEST_SUCCESS = 0;
+    public final static int REQUEST_ERROR = 1;
+
+
 }

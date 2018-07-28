@@ -30,6 +30,7 @@ public abstract class BaseFragment <T extends AbsPresenter> extends SupportFragm
     public View mRootView;
     protected Activity mActivity;
     protected MyApplication mContext;
+    protected final String TAG = "BaseFragment";
     @Inject
     T mPresenter;
 
@@ -78,6 +79,31 @@ public abstract class BaseFragment <T extends AbsPresenter> extends SupportFragm
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void showNormal() {
+
+    }
+
+    @Override
+    public void reload() {
 
     }
 }

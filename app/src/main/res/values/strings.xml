@@ -4,4 +4,7 @@
     <string name="password">Password</string>
     <string name="account">Username or email address</string>
     <string name="no_account">New to GitHub? Create an account.</string>
+    <string name="home">home</string>
+    <string name="tree">tree</string>
+    <string name="project">project</string>
 </resources>

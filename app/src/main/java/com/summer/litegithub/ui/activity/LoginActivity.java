@@ -1,15 +1,14 @@
-package com.summer.litegithub.ui.main;
+package com.summer.litegithub.ui.activity;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.summer.litegithub.Contract.LoginContract;
+import com.summer.litegithub.contract.LoginContract;
 import com.summer.litegithub.R;
 import com.summer.litegithub.base.activity.BaseActivity;
-import com.summer.litegithub.data.login.User;
-import com.summer.litegithub.presenter.login.LoginPresenter;
+import com.summer.litegithub.data.User;
+import com.summer.litegithub.presenter.LoginPresenter;
 import com.summer.litegithub.util.app.JumpUtil;
 
 import butterknife.BindView;
@@ -32,6 +31,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     private LoginPresenter mPresenter;
     private String mUserName;
     private String mPassword;
+    private final static String TAG = "LoginActivity";
 
     @Override
     protected int getLayoutId() {
@@ -64,11 +64,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void loginSuccess(User user) {
-        Toast.makeText(LoginActivity.this,"login success user name is " + user.getUsername(),Toast.LENGTH_SHORT).show();
+        JumpUtil.startActivity(LoginActivity.this,MainActivity.class);
     }
 
     @Override
     public void loginFail(String errorInfo) {
-
+        Toast.makeText(LoginActivity.this,errorInfo,Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,8 +1,8 @@
-package com.summer.litegithub.Contract;
+package com.summer.litegithub.contract;
 
 import com.summer.litegithub.base.presenter.AbsPresenter;
 import com.summer.litegithub.base.view.AbstractView;
-import com.summer.litegithub.data.login.User;
+import com.summer.litegithub.data.User;
 
 /*
  *  项目名：  LiteGitHub

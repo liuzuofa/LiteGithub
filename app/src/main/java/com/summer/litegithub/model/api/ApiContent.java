@@ -47,7 +47,7 @@ public class ApiContent {
     }
 
     private static void createProxy() {
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm.dd hh:mm:ss").create();
+        /*Gson gson = new GsonBuilder().setDateFormat("yyyy-mm.dd hh:mm:ss").create();
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .addInterceptor(new Interceptor() {
                     @Override
@@ -56,18 +56,17 @@ public class ApiContent {
                         return chain.proceed(request);
                     }
                 })
-                .cookieJar(new CookiesManager());
-        SSLSocketFactory sslSocketFactory = getSSLSocketFactory(
+                .cookieJar(new CookiesManager());*/
+        /*SSLSocketFactory sslSocketFactory = getSSLSocketFactory(
                 new Buffer().writeUtf8(AppConfig.SSL_KEY).inputStream(),
                 new Buffer().writeUtf8(AppConfig.MIDDLE_KEY).inputStream());
         if (sslSocketFactory != null) {
             builder.sslSocketFactory(sslSocketFactory);
-        }
+        }*/
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(AppConfig.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(builder.build())
                 .build();
     }
 
