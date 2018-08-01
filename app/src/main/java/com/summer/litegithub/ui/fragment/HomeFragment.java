@@ -12,11 +12,16 @@ import android.widget.LinearLayout;
 import com.summer.litegithub.R;
 import com.summer.litegithub.base.fragment.BaseFragment;
 import com.summer.litegithub.contract.HomeContract;
+import com.summer.litegithub.data.ArticleBean;
 import com.summer.litegithub.data.BannerBean;
 import com.summer.litegithub.presenter.HomePresenter;
 import com.summer.litegithub.ui.adapter.RecycleViewAdapter;
+import com.summer.litegithub.util.glide.GlideImageLoader;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,6 +44,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     private LinearLayout mBannerView;
     private HomePresenter mHomePresenter;
     private RecycleViewAdapter mAdapter;
+    private List<ArticleBean> mArticleBeanList;
+    private List<String> mBannerTitleList;
+    private List<String> mBannerImageList;
+    private List<String> mBannerLinkList;
+    private Banner mBanner;
 
     public HomeFragment() {
         Log.d(TAG, "HomeFragment Construct");
@@ -56,17 +66,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     @Override
-    protected void initData() {
-        mHomePresenter = new HomePresenter(this);
+    protected void initView() {
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBannerView = (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner,null);
+        mBanner = mBannerView.findViewById(R.id.banner);
+        mBannerView.removeView(mBanner);
+        mBannerView.addView(mBanner);
 
     }
 
     @Override
-    protected void initView() {
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBannerView = (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner,null);
-        //mBanner = mBannerView.findViewById(R.id.banner);
-
+    protected void initData() {
+        mArticleBeanList = new ArrayList<>();
+        mBannerTitleList = new ArrayList<>();
+        mBannerImageList = new ArrayList<>();
+        mBannerLinkList = new ArrayList<>();
+        mHomePresenter = new HomePresenter(this);
+        mHomePresenter.getBanner();
+        mAdapter = new RecycleViewAdapter(R.layout.item_recycle,mArticleBeanList);
+        mAdapter.addHeaderView(mBannerView);
+        mRecycleView.setAdapter(mAdapter);
     }
 
     @Override
@@ -86,12 +105,30 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void getBannerSuccess(List<BannerBean> bannerList) {
+        mBannerTitleList.clear();
+        mBannerImageList.clear();
+        mBannerLinkList.clear();
+        for (BannerBean bannerBean: bannerList) {
+            Log.d(TAG,bannerBean.toString());
+            mBannerTitleList.add(bannerBean.getTitle());
+            mBannerImageList.add(bannerBean.getImagePath());
+            mBannerLinkList.add(bannerBean.getUrl());
+        }
+        mBanner.setImageLoader(new GlideImageLoader())
+                .setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
+                .setImages(mBannerImageList)
+                .setBannerTitles(mBannerTitleList)
+                .setBannerAnimation(Transformer.DepthPage)
+                .isAutoPlay(true)
+                .setDelayTime(5000)
+                .setIndicatorGravity(BannerConfig.RIGHT)
+                .start();
 
     }
 
     @Override
     public void getBannerFail(String info) {
-
+        Log.e(TAG, "getBannerFail: " + info );
     }
 
     @Override

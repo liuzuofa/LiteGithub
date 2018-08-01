@@ -51,21 +51,22 @@ public abstract class BaseFragment <T extends AbsPresenter> extends SupportFragm
         mActivity = getActivity();
         mContext = MyApplication.getInstance();
         initBind(view);
+        initView();
+        initData();
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        initView();
-        initData();
-    }
 
-    protected abstract void initData();
+    }
 
     protected abstract void initView();
 
+    protected abstract void initData();
+
     private void initBind(View view) {
-        ButterKnife.bind(view);
+        ButterKnife.bind(this,view);
     }
 
     protected abstract int getLayoutId();

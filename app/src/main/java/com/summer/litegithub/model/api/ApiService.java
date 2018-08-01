@@ -1,7 +1,7 @@
 package com.summer.litegithub.model.api;
 
 import com.summer.litegithub.data.BannerBean;
-import com.summer.litegithub.data.User;
+import com.summer.litegithub.data.UserBean;
 
 
 import java.util.List;
@@ -24,10 +24,9 @@ public interface ApiService {
 
     @POST("user/login")
     @FormUrlEncoded
-    Observable<BaseResponse<User>> login(@Field("username") String username, @Field("password") String password);
+    Observable<BaseResponse<UserBean>> login(@Field("username") String username, @Field("password") String password);
 
     @GET("banner/json")
-    @FormUrlEncoded
     Observable<BaseResponse<List<BannerBean>>> getBanner();
 
 }

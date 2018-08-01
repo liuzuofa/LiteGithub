@@ -36,6 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                app:itemBackground="@color/colorPrimary"
+                app:itemTextColor="@color/white"
                 app:menu="@menu/bottom_navigation_item" />
 
 
@@ -43,7 +45,8 @@
 
         <android.support.design.widget.NavigationView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_gravity="start" />
 
     </android.support.v4.widget.DrawerLayout>
 

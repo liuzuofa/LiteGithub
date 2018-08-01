@@ -19,13 +19,22 @@ public class BannerBean {
     "type": 0,
     "url": "http://www.wanandroid.com/navi"*/
 
+    private String desc;
     private int id;
     private String imagePath;
-    private boolean isVisible;
+    private int isVisible;
     private int order;
     private String title;
     private int type;
     private String url;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public int getId() {
         return id;
@@ -43,11 +52,11 @@ public class BannerBean {
         this.imagePath = imagePath;
     }
 
-    public boolean isVisible() {
+    public int isVisible() {
         return isVisible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(int visible) {
         isVisible = visible;
     }
 
@@ -83,5 +92,16 @@ public class BannerBean {
         this.url = url;
     }
 
-
+    @Override
+    public String toString() {
+        return "BannerBean{" +
+                "id=" + id +
+                ", imagePath='" + imagePath + '\'' +
+                ", isVisible=" + isVisible +
+                ", order=" + order +
+                ", title='" + title + '\'' +
+                ", type=" + type +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

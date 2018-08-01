@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.summer.litegithub.contract.LoginContract;
 import com.summer.litegithub.R;
 import com.summer.litegithub.base.activity.BaseActivity;
-import com.summer.litegithub.data.User;
+import com.summer.litegithub.data.UserBean;
 import com.summer.litegithub.presenter.LoginPresenter;
 import com.summer.litegithub.util.app.JumpUtil;
 
@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
 
     @Override
-    public void loginSuccess(User user) {
+    public void loginSuccess(UserBean user) {
         JumpUtil.startActivity(LoginActivity.this,MainActivity.class);
     }
 

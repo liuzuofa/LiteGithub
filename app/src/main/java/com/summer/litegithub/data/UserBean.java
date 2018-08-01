@@ -3,17 +3,17 @@ package com.summer.litegithub.data;
 /*
  *  项目名：  LiteGitHub
  *  包名：    com.summer.litegithub.data.login
- *  文件名:   User
+ *  文件名:   UserBean
  *  创建者:   Summers
  *  创建时间: 2018/7/1619:42
  *  描述：    TODO
  */
-public class User {
+public class UserBean {
     private int id;
     private String username;
     private String password;
 
-    public User() {
+    public UserBean() {
 
     }
     public int getId() {

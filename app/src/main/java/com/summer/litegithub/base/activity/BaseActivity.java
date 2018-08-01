@@ -41,7 +41,7 @@ public abstract class BaseActivity<T extends AbsPresenter> extends SupportActivi
         initData();
     }
 
-    private void initToolbar() {
+    public void initToolbar() {
 
     }
 

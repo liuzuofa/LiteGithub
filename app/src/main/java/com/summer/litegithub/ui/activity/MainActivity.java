@@ -1,10 +1,12 @@
 package com.summer.litegithub.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.summer.litegithub.R;
@@ -12,6 +14,7 @@ import com.summer.litegithub.base.activity.BaseActivity;
 import com.summer.litegithub.base.presenter.BasePresenter;
 import com.summer.litegithub.contract.HomeContract;
 import com.summer.litegithub.ui.fragment.HomeFragment;
+import com.summer.litegithub.ui.fragment.TreeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,11 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> {
     }
 
     @Override
+    public void initToolbar() {
+        setSupportActionBar(mToolbar);
+    }
+
+    @Override
     protected void initView() {
         mPresenter = new BasePresenter();
         initFragment();
@@ -61,10 +69,31 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> {
     private void initFragment() {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(HomeFragment.getInstance());
+        mFragmentList.add(TreeFragment.getInstance());
     }
 
     @Override
     protected void initData() {
+        initBottomNavigationView();
+    }
 
+    private void initBottomNavigationView() {
+        mBottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_home:
+                        setCurrentFragment(0);
+                        break;
+                    case R.id.menu_tree:
+                        setCurrentFragment(1);
+                        break;
+                    case R.id.menu_project:
+                        //setCurrentFragment(3);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 }

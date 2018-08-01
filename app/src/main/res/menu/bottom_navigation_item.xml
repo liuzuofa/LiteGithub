@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_home"
-        android:title="@string/home">
-
-    </item>
+        android:icon="@drawable/menu_home"
+        android:title="@string/home"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_tree"
-        android:title="@string/tree">
+        android:icon="@drawable/menu_tree"
+        android:title="@string/tree"
+        app:showAsAction="ifRoom" />
 
-    </item>
+    <item
+        android:id="@+id/menu_navi"
+        android:icon="@drawable/menu_navi"
+        android:title="@string/navigation"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_project"
-        android:title="@string/project">
-
-    </item>
+        android:icon="@drawable/menu_project"
+        android:title="@string/project"
+        app:showAsAction="ifRoom" />
 </menu>

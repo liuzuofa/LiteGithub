@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.summer.litegithub.contract.LoginContract;
 import com.summer.litegithub.base.presenter.BasePresenter;
-import com.summer.litegithub.data.User;
+import com.summer.litegithub.data.UserBean;
 import com.summer.litegithub.model.api.ApiContent;
 import com.summer.litegithub.model.api.ApiService;
 import com.summer.litegithub.model.api.BaseResponse;
@@ -36,9 +36,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                 .login(name,password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new HttpObserver<BaseResponse<User>>() {
+                .subscribe(new HttpObserver<BaseResponse<UserBean>>() {
                     @Override
-                    public void onNext(BaseResponse<User> userBaseResponse) {
+                    public void onNext(BaseResponse<UserBean> userBaseResponse) {
                         Log.d(TAG, "onNext: code :" + userBaseResponse.getErrorCode() );
                         if (userBaseResponse.getErrorCode() == 0 ) {
                             mView.loginSuccess(userBaseResponse.getData());
