@@ -2,6 +2,7 @@ package com.summer.litegithub.contract;
 
 import com.summer.litegithub.base.presenter.AbsPresenter;
 import com.summer.litegithub.base.view.AbstractView;
+import com.summer.litegithub.data.ArticleBean;
 import com.summer.litegithub.data.BannerBean;
 
 import java.util.List;
@@ -21,12 +22,14 @@ public class HomeContract {
         void autoLoginFail();
         void getBannerSuccess(List<BannerBean> bannerList);
         void getBannerFail(String info);
+        void getArticleListByPageSuccess(List<ArticleBean> articleBeanList);
+        void getArticleListByPageFail();
     }
 
     public interface Presenter extends AbsPresenter<View> {
         void autoLogin();
         void getBanner();
-        void getHomeItemInfo(int page);
+        void getArticleListByPage(int page);
         void loadMore();
         void refresh();
     }

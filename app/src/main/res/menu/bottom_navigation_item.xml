@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/menu_navi"
-        android:icon="@drawable/menu_navi"
+        android:icon="@drawable/menu_navigation"
         android:title="@string/navigation"
         app:showAsAction="ifRoom" />
 
