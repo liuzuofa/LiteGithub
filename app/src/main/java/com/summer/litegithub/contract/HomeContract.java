@@ -21,9 +21,9 @@ public class HomeContract {
         void autoLoginSuccess();
         void autoLoginFail();
         void getBannerSuccess(List<BannerBean> bannerList);
-        void getBannerFail(String info);
-        void getArticleListByPageSuccess(List<ArticleBean> articleBeanList);
-        void getArticleListByPageFail();
+        void getBannerFail(String errorMessage);
+        void getArticleListByPageSuccess(ArticleBean articleBean);
+        void getArticleListByPageFail(String errorMessage);
     }
 
     public interface Presenter extends AbsPresenter<View> {

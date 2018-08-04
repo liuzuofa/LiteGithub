@@ -1,8 +1,11 @@
 package com.summer.litegithub.presenter;
 
+import android.util.Log;
+
 import com.summer.litegithub.base.presenter.AbsPresenter;
 import com.summer.litegithub.base.presenter.BasePresenter;
 import com.summer.litegithub.contract.HomeContract;
+import com.summer.litegithub.data.ArticleBean;
 import com.summer.litegithub.data.BannerBean;
 import com.summer.litegithub.model.api.ApiContent;
 import com.summer.litegithub.model.api.ApiService;
@@ -26,10 +29,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class HomePresenter extends BasePresenter<HomeContract.View> implements HomeContract.Presenter {
     private HomeContract.View mView;
+    private String TAG = "HomePresenter";
 
     public HomePresenter(HomeContract.View view) {
         mView = view;
     }
+
     @Override
     public void autoLogin() {
 
@@ -60,7 +65,26 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
 
     @Override
     public void getArticleListByPage(int page) {
+        ApiContent.createApi(ApiService.class)
+                .getArticleListByPage(page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new HttpObserver<BaseResponse<ArticleBean>>() {
+                    @Override
+                    public void onNext(BaseResponse<ArticleBean> articleBeanBaseResponse) {
+                        if (articleBeanBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
+                            mView.getArticleListByPageSuccess(articleBeanBaseResponse.getData());
+                            Log.e(TAG, "onNext: " + articleBeanBaseResponse.getData().toString());
+                        } else if (articleBeanBaseResponse.getErrorCode() == Constant.REQUEST_ERROR) {
+                            mView.getArticleListByPageFail(articleBeanBaseResponse.getErrorMsg());
+                        }
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.getArticleListByPageFail(e.getMessage());
+                    }
+                });
     }
 
     @Override

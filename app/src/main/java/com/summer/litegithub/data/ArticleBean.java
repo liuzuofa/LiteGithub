@@ -77,35 +77,35 @@ public class ArticleBean {
 
     public static class Data {
         /**
-        "apkLink": "",
-        "author": "weizongwei5",
-        "chapterId": 363,
-        "chapterName": "创意汇",
-        "collect": false,
-        "courseId": 13,
-        "desc": "非常优雅的方案实现屏幕截图，利用android 5.0之后的录屏API实现截屏。\r\n",
-        "envelopePic": "http://www.wanandroid.com/resources/image/pc/default_project_img.jpg",
-        "fresh": false,
-        "id": 3154,
-        "link": "http://www.wanandroid.com/blog/show/2233",
-        "niceDate": "2018-07-24",
-        "origin": "",
-        "projectLink": "https://github.com/weizongwei5/AndroidScreenShot_SysApi",
-        "publishTime": 1532415791000,
-        "superChapterId": 294,
-        "superChapterName": "开源项目主Tab",
-        "tags": [
-          {
-            "name": "项目",
-            "url": "/project/list/1?cid=363"
-          }
-        ],
-        "title": "优雅的方案实现屏幕截图  AndroidScreenShot_SysApi",
-        "type": 0,
-        "userId": -1,
-        "visible": 1,
-        "zan": 0
-        * */
+         * "apkLink": "",
+         * "author": "weizongwei5",
+         * "chapterId": 363,
+         * "chapterName": "创意汇",
+         * "collect": false,
+         * "courseId": 13,
+         * "desc": "非常优雅的方案实现屏幕截图，利用android 5.0之后的录屏API实现截屏。\r\n",
+         * "envelopePic": "http://www.wanandroid.com/resources/image/pc/default_project_img.jpg",
+         * "fresh": false,
+         * "id": 3154,
+         * "link": "http://www.wanandroid.com/blog/show/2233",
+         * "niceDate": "2018-07-24",
+         * "origin": "",
+         * "projectLink": "https://github.com/weizongwei5/AndroidScreenShot_SysApi",
+         * "publishTime": 1532415791000,
+         * "superChapterId": 294,
+         * "superChapterName": "开源项目主Tab",
+         * "tags": [
+         * {
+         * "name": "项目",
+         * "url": "/project/list/1?cid=363"
+         * }
+         * ],
+         * "title": "优雅的方案实现屏幕截图  AndroidScreenShot_SysApi",
+         * "type": 0,
+         * "userId": -1,
+         * "visible": 1,
+         * "zan": 0
+         */
         private String apkLink;
         private String author;
         private int chapterId;
@@ -314,6 +314,35 @@ public class ArticleBean {
             this.tags = tags;
         }
 
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "apkLink='" + apkLink + '\'' +
+                    ", author='" + author + '\'' +
+                    ", chapterId=" + chapterId +
+                    ", chapterName='" + chapterName + '\'' +
+                    ", collect=" + collect +
+                    ", courseId=" + courseId +
+                    ", desc='" + desc + '\'' +
+                    ", envelopePic='" + envelopePic + '\'' +
+                    ", fresh=" + fresh +
+                    ", id=" + id +
+                    ", link='" + link + '\'' +
+                    ", niceDate='" + niceDate + '\'' +
+                    ", origin='" + origin + '\'' +
+                    ", projectLink='" + projectLink + '\'' +
+                    ", publishTime=" + publishTime +
+                    ", superChapterId=" + superChapterId +
+                    ", superChapterName='" + superChapterName + '\'' +
+                    ", title='" + title + '\'' +
+                    ", type=" + type +
+                    ", userId=" + userId +
+                    ", visible=" + visible +
+                    ", zan=" + zan +
+                    ", tags=" + tags +
+                    '}';
+        }
+
         public static class Tags {
             private String name;
             private String url;
@@ -334,5 +363,18 @@ public class ArticleBean {
                 this.url = url;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleBean{" +
+                "curPage=" + curPage +
+                ", dataList=" + dataList +
+                ", offset=" + offset +
+                ", over=" + over +
+                ", pageCount=" + pageCount +
+                ", size=" + size +
+                ", total=" + total +
+                '}';
     }
 }

@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /*
  *  项目名：  LiteGitHub
@@ -44,7 +42,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     private LinearLayout mBannerView;
     private HomePresenter mHomePresenter;
     private RecycleViewAdapter mAdapter;
-    private List<ArticleBean> mArticleBeanList;
+    private List<ArticleBean.Data> mArticleBeanDataList;
     private List<String> mBannerTitleList;
     private List<String> mBannerImageList;
     private List<String> mBannerLinkList;
@@ -68,7 +66,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     protected void initView() {
         mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBannerView = (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner,null);
+        mBannerView = (LinearLayout) getLayoutInflater().inflate(R.layout.view_banner, null);
         mBanner = mBannerView.findViewById(R.id.banner);
         mBannerView.removeView(mBanner);
         mBannerView.addView(mBanner);
@@ -77,13 +75,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     protected void initData() {
-        mArticleBeanList = new ArrayList<>();
+        mArticleBeanDataList = new ArrayList<>();
         mBannerTitleList = new ArrayList<>();
         mBannerImageList = new ArrayList<>();
         mBannerLinkList = new ArrayList<>();
         mHomePresenter = new HomePresenter(this);
         mHomePresenter.getBanner();
-        mAdapter = new RecycleViewAdapter(R.layout.item_recycle,mArticleBeanList);
+        mHomePresenter.getArticleListByPage(1);
+        mAdapter = new RecycleViewAdapter(R.layout.item_home_list, mArticleBeanDataList);
         mAdapter.addHeaderView(mBannerView);
         mRecycleView.setAdapter(mAdapter);
     }
@@ -108,8 +107,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         mBannerTitleList.clear();
         mBannerImageList.clear();
         mBannerLinkList.clear();
-        for (BannerBean bannerBean: bannerList) {
-            Log.d(TAG,bannerBean.toString());
+        for (BannerBean bannerBean : bannerList) {
             mBannerTitleList.add(bannerBean.getTitle());
             mBannerImageList.add(bannerBean.getImagePath());
             mBannerLinkList.add(bannerBean.getUrl());
@@ -127,18 +125,24 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     @Override
-    public void getBannerFail(String info) {
-        Log.e(TAG, "getBannerFail: " + info );
+    public void getBannerFail(String errorMessage) {
+        Log.e(TAG, "getBannerFail: " + errorMessage);
     }
 
     @Override
-    public void getArticleListByPageSuccess(List<ArticleBean> articleBeanList) {
-
+    public void getArticleListByPageSuccess(ArticleBean articleBean) {
+        if (mAdapter == null) {
+            return;
+        }
+        mArticleBeanDataList = articleBean.getDataList();
+        if (mArticleBeanDataList != null) {
+            mAdapter.replaceData(mArticleBeanDataList);
+        }
     }
 
     @Override
-    public void getArticleListByPageFail() {
-
+    public void getArticleListByPageFail(String errorMessage) {
+        Log.e(TAG, "getArticleListByPageFail: " + errorMessage);
     }
 
     @Override

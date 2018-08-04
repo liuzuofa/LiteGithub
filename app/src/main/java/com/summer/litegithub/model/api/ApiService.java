@@ -32,6 +32,6 @@ public interface ApiService {
     Observable<BaseResponse<List<BannerBean>>> getBanner();
 
     @GET("article/list/{page}/json")
-    Observable<BaseResponse<ArticleBean>> getArticleListByPage(@Path("page") int page);
+    Observable<BaseResponse<ArticleBean>> getArticleListByPage(@Path("page") int num);
 
 }
