@@ -1,6 +1,7 @@
 package com.summer.litegithub.ui.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.summer.litegithub.R;
 import com.summer.litegithub.base.fragment.BaseFragment;
 import com.summer.litegithub.contract.HomeContract;
@@ -25,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /*
  *  项目名：  LiteGitHub
@@ -34,19 +41,25 @@ import butterknife.BindView;
  *  创建时间: 2018/7/1920:08
  *  描述：    TODO
  */
-public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View {
+public class HomeFragment extends BaseFragment<HomePresenter> implements
+        HomeContract.View {
 
     private static HomeFragment mHomeFragment;
     @BindView(R.id.recycle_view)
     RecyclerView mRecycleView;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout mRefreshLayout;
+    Unbinder unbinder;
     private LinearLayout mBannerView;
     private HomePresenter mHomePresenter;
     private RecycleViewAdapter mAdapter;
-    private List<ArticleBean.Data> mArticleBeanDataList;
+    private List<ArticleBean.Datas> mArticleBeanDataList;
     private List<String> mBannerTitleList;
     private List<String> mBannerImageList;
     private List<String> mBannerLinkList;
     private Banner mBanner;
+    private int mCurrentPage = 0;
+    private int mTotlePage;
 
     public HomeFragment() {
         Log.d(TAG, "HomeFragment Construct");
@@ -75,16 +88,39 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     protected void initData() {
+        setRefresh();
         mArticleBeanDataList = new ArrayList<>();
         mBannerTitleList = new ArrayList<>();
         mBannerImageList = new ArrayList<>();
         mBannerLinkList = new ArrayList<>();
         mHomePresenter = new HomePresenter(this);
         mHomePresenter.getBanner();
-        mHomePresenter.getArticleListByPage(1);
+        mHomePresenter.getArticleListByPage(mCurrentPage);
         mAdapter = new RecycleViewAdapter(R.layout.item_home_list, mArticleBeanDataList);
         mAdapter.addHeaderView(mBannerView);
         mRecycleView.setAdapter(mAdapter);
+    }
+
+    private void setRefresh() {
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mCurrentPage = 0;
+                mHomePresenter.getArticleListByPage(mCurrentPage);
+                mRefreshLayout.finishRefresh(1000);
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                if (mCurrentPage < mTotlePage - 1) {
+                    mCurrentPage++;
+                    Log.e(TAG, "onLoadMoreRequested: " + mCurrentPage);
+                    mHomePresenter.loadMore(mCurrentPage);
+                    mRefreshLayout.finishLoadMore(1000);
+                }
+            }
+        });
     }
 
     @Override
@@ -134,10 +170,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         if (mAdapter == null) {
             return;
         }
-        mArticleBeanDataList = articleBean.getDataList();
+        mTotlePage = articleBean.getPageCount();
+        mArticleBeanDataList = articleBean.getDatas();
         if (mArticleBeanDataList != null) {
-            mAdapter.replaceData(mArticleBeanDataList);
+            if (mCurrentPage == 0) {
+                mAdapter.replaceData(mArticleBeanDataList);
+            } else {
+                mAdapter.addData(mArticleBeanDataList);
+            }
         }
+
     }
 
     @Override
@@ -149,6 +191,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

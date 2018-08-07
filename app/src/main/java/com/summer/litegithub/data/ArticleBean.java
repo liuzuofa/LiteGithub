@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ArticleBean {
     private int curPage;
-    private List<Data> dataList;
+    private List<Datas> datas;
     private int offset;
     private boolean over;
     private int pageCount;
@@ -27,12 +27,12 @@ public class ArticleBean {
         this.curPage = curPage;
     }
 
-    public List<Data> getDataList() {
-        return dataList;
+    public List<Datas> getDatas() {
+        return datas;
     }
 
-    public void setDataList(List<Data> dataList) {
-        this.dataList = dataList;
+    public void setDatas(List<Datas> datas) {
+        this.datas = datas;
     }
 
     public int getOffset() {
@@ -75,7 +75,7 @@ public class ArticleBean {
         this.total = total;
     }
 
-    public static class Data {
+    public static class Datas {
         /**
          * "apkLink": "",
          * "author": "weizongwei5",
@@ -369,7 +369,7 @@ public class ArticleBean {
     public String toString() {
         return "ArticleBean{" +
                 "curPage=" + curPage +
-                ", dataList=" + dataList +
+                ", dataList=" + datas +
                 ", offset=" + offset +
                 ", over=" + over +
                 ", pageCount=" + pageCount +

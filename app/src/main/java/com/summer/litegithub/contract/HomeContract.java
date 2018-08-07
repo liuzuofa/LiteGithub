@@ -30,7 +30,7 @@ public class HomeContract {
         void autoLogin();
         void getBanner();
         void getArticleListByPage(int page);
-        void loadMore();
+        void loadMore(int nextPage);
         void refresh();
     }
 }

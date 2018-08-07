@@ -88,8 +88,8 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
     }
 
     @Override
-    public void loadMore() {
-
+    public void loadMore(int nextPage) {
+        getArticleListByPage(nextPage);
     }
 
     @Override

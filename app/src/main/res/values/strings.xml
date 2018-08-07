@@ -7,6 +7,6 @@
     <string name="home">Home</string>
     <string name="tree">Tree</string>
     <string name="project">Project</string>
-    <string name="navigation">Navigation</string>
-    <string name="collection">Collection</string>
+    <string name="navigation">Navi</string>
+    <string name="collection">Collect</string>
 </resources>

@@ -26,14 +26,14 @@ import java.util.List;
  *  创建时间: 2018/7/2519:44
  *  描述：    TODO
  */
-public class RecycleViewAdapter extends BaseQuickAdapter<ArticleBean.Data, BaseViewHolder> {
+public class RecycleViewAdapter extends BaseQuickAdapter<ArticleBean.Datas, BaseViewHolder> {
 
-    public RecycleViewAdapter(int layoutResId, @Nullable List<ArticleBean.Data> data) {
+    public RecycleViewAdapter(int layoutResId, @Nullable List<ArticleBean.Datas> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ArticleBean.Data item) {
+    protected void convert(BaseViewHolder helper, ArticleBean.Datas item) {
         if (!TextUtils.isEmpty(item.getTitle())) {
             helper.setText(R.id.tv_article_title, item.getTitle());
         }
@@ -42,9 +42,7 @@ public class RecycleViewAdapter extends BaseQuickAdapter<ArticleBean.Data, BaseV
         }
         if (!TextUtils.isEmpty(item.getSuperChapterName()) &&
                 !TextUtils.isEmpty(item.getChapterName())) {
-            helper.setText(R.id.tv_article_class,
-                    item.getSuperChapterName() + "/" +
-                            item.getChapterName());
+            helper.setText(R.id.tv_article_class, item.getChapterName());
         }
         if (!TextUtils.isEmpty(item.getNiceDate())) {
             helper.setText(R.id.tv_article_time, item.getNiceDate());
