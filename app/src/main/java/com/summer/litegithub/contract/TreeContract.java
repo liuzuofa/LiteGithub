@@ -17,10 +17,14 @@ import java.util.List;
 public class TreeContract {
 
     public interface View extends AbstractView {
-
+        void getTreeNavigationSuccess();
+        void getTreeNavigationFail();
+        void getTreeArticleListSuccess();
+        void getTreeArticleListFail();
     }
 
     public interface Presenter extends AbsPresenter<View> {
-
+        void getTreeNavigation();
+        void getTreeArticleList(int subId);
     }
 }

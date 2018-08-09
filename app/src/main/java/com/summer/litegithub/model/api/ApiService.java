@@ -2,6 +2,7 @@ package com.summer.litegithub.model.api;
 
 import com.summer.litegithub.data.ArticleBean;
 import com.summer.litegithub.data.BannerBean;
+import com.summer.litegithub.data.TreeNaviBean;
 import com.summer.litegithub.data.UserBean;
 
 
@@ -34,4 +35,6 @@ public interface ApiService {
     @GET("article/list/{page}/json")
     Observable<BaseResponse<ArticleBean>> getArticleListByPage(@Path("page") int num);
 
+    @GET("tree/json")
+    Observable<BaseResponse<List<TreeNaviBean>>> getTreeNavi();
 }

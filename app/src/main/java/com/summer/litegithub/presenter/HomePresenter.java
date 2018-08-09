@@ -74,7 +74,6 @@ public class HomePresenter extends BasePresenter<HomeContract.View> implements H
                     public void onNext(BaseResponse<ArticleBean> articleBeanBaseResponse) {
                         if (articleBeanBaseResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
                             mView.getArticleListByPageSuccess(articleBeanBaseResponse.getData());
-                            Log.e(TAG, "onNext: " + articleBeanBaseResponse.getData().toString());
                         } else if (articleBeanBaseResponse.getErrorCode() == Constant.REQUEST_ERROR) {
                             mView.getArticleListByPageFail(articleBeanBaseResponse.getErrorMsg());
                         }
