@@ -21,14 +21,14 @@ import java.util.List;
 /*
  *  项目名：  LiteGitHub
  *  包名：    com.summer.litegithub.ui.adapter
- *  文件名:   RecycleViewAdapter
+ *  文件名:   RecyclerViewAdapter
  *  创建者:   Summers
  *  创建时间: 2018/7/2519:44
  *  描述：    TODO
  */
-public class RecycleViewAdapter extends BaseQuickAdapter<ArticleBean.Datas, BaseViewHolder> {
+public class RecyclerViewAdapter extends BaseQuickAdapter<ArticleBean.Datas, BaseViewHolder> {
 
-    public RecycleViewAdapter(int layoutResId, @Nullable List<ArticleBean.Datas> data) {
+    public RecyclerViewAdapter(int layoutResId, @Nullable List<ArticleBean.Datas> data) {
         super(layoutResId, data);
     }
 

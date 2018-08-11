@@ -20,7 +20,7 @@ import com.summer.litegithub.contract.HomeContract;
 import com.summer.litegithub.data.ArticleBean;
 import com.summer.litegithub.data.BannerBean;
 import com.summer.litegithub.presenter.HomePresenter;
-import com.summer.litegithub.ui.adapter.RecycleViewAdapter;
+import com.summer.litegithub.ui.adapter.RecyclerViewAdapter;
 import com.summer.litegithub.util.glide.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -52,14 +52,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements
     Unbinder unbinder;
     private LinearLayout mBannerView;
     private HomePresenter mHomePresenter;
-    private RecycleViewAdapter mAdapter;
+    private RecyclerViewAdapter mAdapter;
     private List<ArticleBean.Datas> mArticleBeanDataList;
     private List<String> mBannerTitleList;
     private List<String> mBannerImageList;
     private List<String> mBannerLinkList;
     private Banner mBanner;
     private int mCurrentPage = 0;
-    private int mTotlePage;
+    private int mTotalPage;
 
     public HomeFragment() {
         Log.d(TAG, "HomeFragment Construct");
@@ -96,7 +96,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements
         mHomePresenter = new HomePresenter(this);
         mHomePresenter.getBanner();
         mHomePresenter.getArticleListByPage(mCurrentPage);
-        mAdapter = new RecycleViewAdapter(R.layout.item_home_list, mArticleBeanDataList);
+        mAdapter = new RecyclerViewAdapter(R.layout.item_home_list, mArticleBeanDataList);
         mAdapter.addHeaderView(mBannerView);
         mRecycleView.setAdapter(mAdapter);
     }
@@ -113,7 +113,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                if (mCurrentPage < mTotlePage - 1) {
+                if (mCurrentPage < mTotalPage - 1) {
                     mCurrentPage++;
                     Log.e(TAG, "onLoadMoreRequested: " + mCurrentPage);
                     mHomePresenter.loadMore(mCurrentPage);
@@ -170,7 +170,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements
         if (mAdapter == null) {
             return;
         }
-        mTotlePage = articleBean.getPageCount();
+        mTotalPage = articleBean.getPageCount();
         mArticleBeanDataList = articleBean.getDatas();
         if (mArticleBeanDataList != null) {
             if (mCurrentPage == 0) {

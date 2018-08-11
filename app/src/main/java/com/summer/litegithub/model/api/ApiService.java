@@ -14,6 +14,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /*
  *  项目名：  LiteGitHub
@@ -37,4 +38,7 @@ public interface ApiService {
 
     @GET("tree/json")
     Observable<BaseResponse<List<TreeNaviBean>>> getTreeNavi();
+
+    @GET("article/list/{page}/json")
+    Observable<BaseResponse<ArticleBean>> getArticleListByPageAndCid(@Path("page") int page, @Query("cid") int cid);
 }
