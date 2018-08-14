@@ -14,6 +14,7 @@ import com.summer.litegithub.base.activity.BaseActivity;
 import com.summer.litegithub.base.presenter.BasePresenter;
 import com.summer.litegithub.contract.HomeContract;
 import com.summer.litegithub.ui.fragment.HomeFragment;
+import com.summer.litegithub.ui.fragment.ProjectFragment;
 import com.summer.litegithub.ui.fragment.TreeFragment;
 import com.summer.litegithub.util.app.BottomNavigationViewHelper;
 
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(HomeFragment.getInstance());
         mFragmentList.add(TreeFragment.getInstance());
+        mFragmentList.add(ProjectFragment.getInstance());
     }
 
     @Override
@@ -91,7 +93,7 @@ public class MainActivity extends BaseActivity<HomeContract.Presenter> {
                         setCurrentFragment(1);
                         break;
                     case R.id.menu_project:
-                        //setCurrentFragment(3);
+                        setCurrentFragment(2);
                         break;
                 }
                 return true;

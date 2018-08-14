@@ -179,7 +179,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements
                 mAdapter.addData(mArticleBeanDataList);
             }
         }
-
     }
 
     @Override
