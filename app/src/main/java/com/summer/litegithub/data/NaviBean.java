@@ -39,7 +39,7 @@ public class NaviBean {
         this.name = name;
     }
 
-    static class Article {
+    public static class Article {
         private String apklink;
         private String author;
         private int chapterid;

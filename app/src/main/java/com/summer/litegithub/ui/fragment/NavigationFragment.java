@@ -7,16 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.summer.litegithub.R;
 import com.summer.litegithub.base.fragment.BaseFragment;
 import com.summer.litegithub.contract.NavigationContract;
 import com.summer.litegithub.data.NaviBean;
 import com.summer.litegithub.presenter.NavigationPresenter;
 import com.summer.litegithub.ui.adapter.NavigationAdapter;
-import com.summer.litegithub.ui.adapter.RecyclerViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,13 +30,25 @@ import butterknife.Unbinder;
  */
 public class NavigationFragment extends BaseFragment<NavigationPresenter>
         implements NavigationContract.View {
-
+    private static NavigationFragment mNavigationFragment = null;
     @BindView(R.id.navi_recycle_view)
     RecyclerView mNaviRecycleView;
     Unbinder unbinder;
     private NavigationPresenter mPresenter;
     private NavigationAdapter mAdapter;
-    private List<NaviBean> mNaviBeanList;
+
+    public static NavigationFragment getInstance() {
+        synchronized (NavigationFragment.class) {
+            if (mNavigationFragment == null) {
+                synchronized (NavigationFragment.class) {
+                    if (mNavigationFragment == null) {
+                        mNavigationFragment = new NavigationFragment();
+                    }
+                }
+            }
+        }
+        return mNavigationFragment;
+    }
 
     @Override
     protected void initView() {
@@ -49,8 +58,9 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter>
     @Override
     protected void initData() {
         mPresenter = new NavigationPresenter(this);
-        mNaviBeanList = new ArrayList<>();
-        mAdapter = new NavigationAdapter();
+        mAdapter = new NavigationAdapter(getContext());
+        mNaviRecycleView.setAdapter(mAdapter);
+        mPresenter.getNavigationList();
     }
 
     @Override
@@ -63,7 +73,7 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter>
         if (mAdapter == null) {
             return;
         }
-
+        mAdapter.setNaviBeans(naviBeanList);
     }
 
     @Override
