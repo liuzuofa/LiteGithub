@@ -47,6 +47,7 @@ public class RecyclerViewAdapter extends BaseQuickAdapter<ArticleBean.Datas, Bas
         if (!TextUtils.isEmpty(item.getNiceDate())) {
             helper.setText(R.id.tv_article_time, item.getNiceDate());
         }
-
+        helper.addOnClickListener(R.id.cv_article_item);
+        helper.addOnClickListener(R.id.iv_article_like);
     }
 }

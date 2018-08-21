@@ -1,5 +1,6 @@
 package com.summer.litegithub.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -19,6 +21,7 @@ import com.summer.litegithub.base.fragment.BaseFragment;
 import com.summer.litegithub.contract.HomeContract;
 import com.summer.litegithub.data.ArticleBean;
 import com.summer.litegithub.data.BannerBean;
+import com.summer.litegithub.model.constant.Constant;
 import com.summer.litegithub.presenter.HomePresenter;
 import com.summer.litegithub.ui.adapter.RecyclerViewAdapter;
 import com.summer.litegithub.util.glide.GlideImageLoader;
@@ -41,8 +44,8 @@ import butterknife.Unbinder;
  *  创建时间: 2018/7/1920:08
  *  描述：    TODO
  */
-public class HomeFragment extends BaseFragment<HomePresenter> implements
-        HomeContract.View {
+public class HomeFragment extends BaseFragment<HomePresenter> implements HomeContract.View,
+        BaseQuickAdapter.OnItemClickListener,BaseQuickAdapter.OnItemChildClickListener{
 
     private static HomeFragment mHomeFragment;
     @BindView(R.id.recycle_view)
@@ -198,5 +201,20 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.ARTICLE_TITLE,mAdapter.getData().get(position).getTitle());
+        bundle.putString(Constant.ARTICLE_LINK,mAdapter.getData().get(position).getLink());
+        bundle.putBoolean(Constant.ARTICLE_IS_COLLECTED,mAdapter.getData().get(position).isCollect());
+        startActivity(new Intent(mActivity,WebViewFragment.class).putExtras(bundle));
+
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+
     }
 }

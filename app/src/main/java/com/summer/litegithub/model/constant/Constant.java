@@ -17,4 +17,7 @@ public class Constant {
     public final static int REQUEST_ERROR = 1;
 
 
+    public static String ARTICLE_TITLE = "article_title";
+    public static String ARTICLE_LINK = "article_link";
+    public static String ARTICLE_IS_COLLECTED = "article_is_collected";
 }
